@@ -30,13 +30,13 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="Content\radius.dictionary">
+        <EmbeddedResource Include="Content\radius.dictionary">
             <PackageCopyToOutput>true</PackageCopyToOutput>
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
             <IncludeInPackage>true</IncludeInPackage>
             <BuildAction>None</BuildAction>
             <CopyToOutput>true</CopyToOutput>
-        </Content>
+        </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>

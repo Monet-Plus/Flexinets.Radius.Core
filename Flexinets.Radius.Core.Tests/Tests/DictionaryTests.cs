@@ -38,4 +38,27 @@ public class DictionaryTests
             Assert.That(vendorAttributeByCode.Type, Is.EqualTo("octet"));
         });
     }
+
+    // add test of dictionary loaded from defaultdictionary
+    [TestCase]
+    public void TestDefaultDictionaryLoaded()
+    {
+        var dictionary = RadiusDictionary.Parse(DefaultDictionary.RadiusDictionary);
+
+        Assert.Multiple(() =>
+        {
+            // test a few known attributes from default dictionary
+            var attributeByName = dictionary.GetAttribute("User-Name")!;
+            Assert.That(attributeByName.Code, Is.EqualTo(1));
+            Assert.That(attributeByName.Type, Is.EqualTo("string"));
+
+            var attributeByCode = dictionary.GetAttribute(4);
+            Assert.That(attributeByCode!.Name, Is.EqualTo("NAS-IP-Address"));
+            Assert.That(attributeByCode!.Type, Is.EqualTo("ipaddr"));
+
+            var vendorAttributeByCode = dictionary.GetVendorAttribute(5, 3)!;
+            Assert.That(vendorAttributeByCode.Name, Is.EqualTo("Acc-Input-Errors"));
+            Assert.That(vendorAttributeByCode.Type, Is.EqualTo("integer"));
+        });
+    }
 }

@@ -20,19 +20,6 @@ namespace Flexinets.Radius.Core
         public RadiusPacketParser(
             ILogger<RadiusPacketParser> logger,
             IRadiusDictionary dictionary,
-            bool skipBlastRadiusChecks = false) : this(
-                logger,
-                dictionary,
-                new RadiusPacketParserOptions
-                {
-                    SkipBlastRadiusChecks = skipBlastRadiusChecks
-                })
-        {
-        }
-
-        public RadiusPacketParser(
-            ILogger<RadiusPacketParser> logger,
-            IRadiusDictionary dictionary,
             RadiusPacketParserOptions options)
         {
             _logger = logger;

@@ -2,7 +2,8 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
-        <Nullable>enable</Nullable>
+	    <Nullable>enable</Nullable>
+		<LangVersion>9.0</LangVersion>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <IsPackable>true</IsPackable>
         <JsonSerializerIsReflectionEnabledByDefault>false</JsonSerializerIsReflectionEnabledByDefault>
@@ -21,10 +22,11 @@
         <PackageReleaseNotes>Message authenticator handling for blastradius</PackageReleaseNotes>
         <PackageTags>Radius packet parser assembler</PackageTags>
         <PackageReadmeFile>README.md</PackageReadmeFile>
+        <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove="Content\radius.dictionary"/>
+        <None Remove="Content\radius.dictionary" />
     </ItemGroup>
 
     <ItemGroup>
@@ -38,15 +40,15 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Include="../README.md" Pack="true" PackagePath="/"/>
+        <None Include="../README.md" Pack="true" PackagePath="/" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2" />
     </ItemGroup>
 
     <ItemGroup>
-        <InternalsVisibleTo Include="Flexinets.Radius.Core.Tests"/>
+        <InternalsVisibleTo Include="Flexinets.Radius.Core.Tests" />
     </ItemGroup>
 
 </Project>

@@ -6,11 +6,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Flexinets.Radius.Core
 {
+
     public partial class RadiusPacketParser : IRadiusPacketParser
     {
         private readonly ILogger _logger;
         private readonly IRadiusDictionary _dictionary;
-        private readonly bool _skipBlastRadiusChecks;
+        private readonly RadiusPacketParserOptions _options;
 
 
         /// <summary>
@@ -19,19 +20,34 @@ namespace Flexinets.Radius.Core
         public RadiusPacketParser(
             ILogger<RadiusPacketParser> logger,
             IRadiusDictionary dictionary,
-            bool skipBlastRadiusChecks = false)
+            bool skipBlastRadiusChecks = false) : this(
+                logger,
+                dictionary,
+                new RadiusPacketParserOptions
+                {
+                    SkipBlastRadiusChecks = skipBlastRadiusChecks
+                })
+        {
+        }
+
+        public RadiusPacketParser(
+            ILogger<RadiusPacketParser> logger,
+            IRadiusDictionary dictionary,
+            RadiusPacketParserOptions options)
         {
             _logger = logger;
             _dictionary = dictionary;
-            _skipBlastRadiusChecks = skipBlastRadiusChecks;
+            _options = options;
         }
 
 
         /// <summary>
         /// Parses packet bytes and returns an IRadiusPacket
         /// </summary>
-        public IRadiusPacket Parse(byte[] packetBytes, byte[] sharedSecret, byte[]? requestAuthenticator = null)
+        public IRadiusPacket Parse(byte[] packetBytes, byte[] sharedSecret, byte[]? requestAuthenticator = null, RadiusPacketParserOptions? options = null)
         {
+            var currentOptions = options ?? _options;
+
             var (packet, messageAuthenticatorPosition) = ParsePacketBytes(ref packetBytes, sharedSecret);
 
             // Validate RequestAuthenticator for appropriate packet types
@@ -71,7 +87,7 @@ namespace Flexinets.Radius.Core
 
                 // Ensure a Message-Authenticator exists in Access* packets
                 // https://datatracker.ietf.org/doc/html/draft-ietf-radext-deprecating-radius/#section-5
-                if (messageAuthenticatorPosition == 0 && !_skipBlastRadiusChecks)
+                if (messageAuthenticatorPosition == 0 && !currentOptions.SkipBlastRadiusChecks)
                 {
                     throw new MissingMessageAuthenticatorException(
                         "No Message-Authenticator found in packet and BLASTRadius checks enabled");
@@ -80,7 +96,7 @@ namespace Flexinets.Radius.Core
                 // The Message-Authenticator attribute should be first in AccessRequests
                 // and must be first in the other Access* packets
                 // https://datatracker.ietf.org/doc/html/draft-ietf-radext-deprecating-radius/#section-5.2
-                if (messageAuthenticatorPosition != 20 && !_skipBlastRadiusChecks)
+                if (messageAuthenticatorPosition != 20 && !currentOptions.SkipBlastRadiusChecks)
                 {
                     _logger.LogWarning("Message-Authenticator should be first attribute");
                 }
@@ -365,9 +381,9 @@ namespace Flexinets.Radius.Core
                         }
                     }
                 }
-                catch (KeyNotFoundException)
+                catch (KeyNotFoundException ex)
                 {
-                    _logger.LogWarning("Attribute {typeCode} not found in dictionary", typeCode);
+                    _logger.LogWarning(ex, "Attribute {typeCode} not found in dictionary", typeCode);
                 }
                 catch (Exception ex)
                 {

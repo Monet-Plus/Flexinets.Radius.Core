@@ -1343,6 +1343,10 @@ VendorSpecificAttribute	3076	135	Altiga-General-Strip-Realm-G	integer
 VendorSpecificAttribute	3076	136	Altiga-Part-Strip-Realm-G	integer
 VendorSpecificAttribute	3076	137	Altiga-Part-Group-ID-G	integer
 
+# VendorId 3076 - Cisco
+VendorSpecificAttribute	3076	146	Cisco-VPN-Tunnel-Group-Name	string
+VendorSpecificAttribute	3076	150	Cisco-VPN-Client-Type integer
+
 # VendorId 3199
 VendorSpecificAttribute	3199	1	Shasta-User-Priv	integer
 VendorSpecificAttribute	3199	2	Shasta-Service-Profile	string
@@ -1710,6 +1714,42 @@ VendorSpecificAttribute	10415	22	3GPP-User-Location-Info	octet
 VendorSpecificAttribute	10415	23	3GPP-MS-Time-Zone	octet
 VendorSpecificAttribute	10415	26	3GPP-Negotiated-DSCP	octet
 
+# VendorId 12356 (Fortinet)
+VendorSpecificAttribute	12356	1	Fortinet-Group-Name	string
+VendorSpecificAttribute	12356	2	Fortinet-Client-IP-Address	ipaddr
+VendorSpecificAttribute	12356	3	Fortinet-Vdom-Name	string
+VendorSpecificAttribute	12356	4	Fortinet-Client-IPv6-Address	octets
+VendorSpecificAttribute	12356	5	Fortinet-Interface-Name	string
+VendorSpecificAttribute	12356	6	Fortinet-Access-Profile	string
+VendorSpecificAttribute	12356	7	Fortinet-SSID	string
+VendorSpecificAttribute	12356	8	Fortinet-AP-Name	string
+VendorSpecificAttribute	12356	11	Fortinet-FAC-Auth-Status	string
+VendorSpecificAttribute	12356	12	Fortinet-FAC-Token-ID	string
+VendorSpecificAttribute	12356	15	Fortinet-FAC-Challenge-Code	string
+VendorSpecificAttribute	12356	16	Fortinet-Webfilter-Category-Allow	octets
+VendorSpecificAttribute	12356	17	Fortinet-Webfilter-Category-Block	octets
+VendorSpecificAttribute	12356	18	Fortinet-Webfilter-Category-Monitor	octets
+VendorSpecificAttribute	12356	19	Fortinet-AppCtrl-Category-Allow	octets
+VendorSpecificAttribute	12356	20	Fortinet-AppCtrl-Category-Block	octets
+VendorSpecificAttribute	12356	21	Fortinet-AppCtrl-Risk-Allow	octets
+VendorSpecificAttribute	12356	22	Fortinet-AppCtrl-Risk-Block	octets
+VendorSpecificAttribute	12356	23	Fortinet-WirelessController-Device-MAC	ether
+VendorSpecificAttribute	12356	24	Fortinet-WirelessController-WTP-ID	string
+VendorSpecificAttribute	12356	25	Fortinet-WirelessController-Assoc-Time	date
+VendorSpecificAttribute	12356	26	Fortinet-FortiWAN-AVPair	string
+VendorSpecificAttribute	12356	30	Fortinet-FDD-Access-Profile	string
+VendorSpecificAttribute	12356	31	Fortinet-FDD-Trusted-Hosts	string
+VendorSpecificAttribute	12356	32	Fortinet-FDD-SPP-Name	string
+VendorSpecificAttribute	12356	33	Fortinet-FDD-Is-System-Admin	string
+VendorSpecificAttribute	12356	34	Fortinet-FDD-Is-SPP-Admin	string
+VendorSpecificAttribute	12356	35	Fortinet-FDD-SPP-Policy-Group	string
+VendorSpecificAttribute	12356	36	Fortinet-FDD-Allow-API-Access	string
+VendorSpecificAttribute	12356	40	Fortinet-Fpc-User-Role	string
+VendorSpecificAttribute	12356	41	Fortinet-Tenant-Identification	string
+VendorSpecificAttribute	12356	42	Fortinet-Host-Port-AVPair	string
+
+
+
 # VendorId 12902
 VendorSpecificAttribute	12902	1	User-Group-Name	string
 VendorSpecificAttribute	12902	2	Client-BW-Info	string
@@ -1795,3 +1835,4 @@ VendorSpecificAttribute	16313	4	VNC-PPPoE-CBQ-TX-Fallback	integer
 # VendorId 17458
 VendorSpecificAttribute	17458	0	CCA-AVPAIR	string
 VendorSpecificAttribute	17458	1	CCA-Service-Identifier	string
+
